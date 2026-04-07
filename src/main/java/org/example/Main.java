@@ -1,17 +1,58 @@
 package org.example;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-public class Main {
-    static void main() {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        IO.println(String.format("Hello and welcome!"));
+import java.sql.*;
+import java.util.InputMismatchException;
+import java.util.Scanner;
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            IO.println("i = " + i);
-        }
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int opcion = -1;
+        boolean opValida;
+
+        do {
+            do {
+                opValida = false;
+                try {
+                    System.out.println("Elija una opción.");
+                    System.out.println("1.Insertar un nuevo empleado");
+                    System.out.println("2.Mostrar todos los empleado");
+                    System.out.println("3.Actualizar un empleado");
+                    System.out.println("4.Eliminar un nuevo empleado");
+                    System.out.println("0.Salir");
+                    opcion = sc.nextInt();
+                    sc.nextLine();
+                    opValida = true;
+                }catch (InputMismatchException e){
+                    System.out.println("Ingrese un número valido");
+                    sc.nextLine();
+                }
+            }while (!opValida);
+
+            switch (opcion){
+                case 1:
+                    Insertar.insertar(sc);
+                    System.out.println();
+                    break;
+                case 2:
+                    Consulta.mostrarEmpleados();
+                    System.out.println();
+                    break;
+                case 3:
+                    Actualizar.actualizar(sc);
+                    System.out.println();
+                    break;
+                case 4:
+                    Eliminar.eliminarPorID(sc);
+                    System.out.println();
+                    break;
+                case 0:
+                    System.out.println("Hasta pronto");
+                    break;
+                default:
+                    System.out.println("Opción no válida");
+                    break;
+                }
+        }while (opcion!=0);
     }
 }
