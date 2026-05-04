@@ -23,12 +23,22 @@ public class Main {
                     opcion = sc.nextInt();
                     sc.nextLine();
                     opValida = true;
+                /**
+                 * Lanza el siguiente error si la opción introducida no es un número
+                 */
                 }catch (InputMismatchException e){
                     System.out.println("Ingrese un número valido");
                     sc.nextLine();
                 }
+            /**
+             * Repite el bucle mientras opValida sea falsa
+             */
             }while (!opValida);
 
+            /**
+             * Cada opción llama a la clase correspondiente y a su método
+             * pasando por parámetro cuando corresponda el Scanner
+             */
             switch (opcion){
                 case 1:
                     Insertar.insertar(sc);
@@ -53,6 +63,9 @@ public class Main {
                     System.out.println("Opción no válida");
                     break;
                 }
+        /**
+         * El bucle se repite mientras opcion sea diferente a 0
+         */
         }while (opcion!=0);
     }
 }

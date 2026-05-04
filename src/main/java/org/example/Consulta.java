@@ -5,11 +5,18 @@ import java.sql.*;
 public class Consulta {
     public static int consultaUltimoID(){
         int id = 0;
+        /**
+         * Realiza la conexión mediante Maven
+         */
         try (Connection conn = DriverManager.getConnection(
                 DBConfig.getUrl(),
                 DBConfig.getUser(),
                 DBConfig.getPassword()); Statement statement = conn.createStatement()){
             //System.out.println("Conexión establecida con Oracle.");
+            /**
+             * Consulta simple, maximo id de la tabla empleado
+             * para añadir nuevos empleados
+             */
             String sql = "SELECT MAX(ID) FROM empleado" ;
             ResultSet resultSet = statement.executeQuery(sql);
             resultSet.next();
@@ -25,11 +32,18 @@ public class Consulta {
     public static boolean consultaExisteID(int id){
         boolean result = false;
 
+        /**
+         * Realiza la conexión mediante Maven
+         */
         try (Connection conn = DriverManager.getConnection(
                 DBConfig.getUrl(),
                 DBConfig.getUser(),
                 DBConfig.getPassword()); Statement statement = conn.createStatement()){
             //System.out.println("Conexión establecida con Oracle.");
+            /**
+             * Consulta simple, recorre los id de la tabla empleado
+             * y los compara con el id pasado por parámetro
+             */
             String sql = "SELECT ID FROM empleado" ;
             ResultSet resultSet = statement.executeQuery(sql);
             while(resultSet.next()){
@@ -46,13 +60,22 @@ public class Consulta {
     }
 
     public static void mostrarEmpleados(){
+        /**
+         * Realiza la conexión mediante Maven
+         */
         try (Connection conn = DriverManager.getConnection(
                 DBConfig.getUrl(),
                 DBConfig.getUser(),
                 DBConfig.getPassword()); Statement statement = conn.createStatement()){
             //System.out.println("Conexión establecida con Oracle.");
+            /**
+             * Consulta para mostrar todos los empleados
+             */
             String sql = "SELECT * FROM empleado" ;
             ResultSet resultSet = statement.executeQuery(sql);
+            /**
+             * Se ejecuta mientra haya resultados
+             */
             while (resultSet.next()) {
                 int id = resultSet.getInt("id");
                 String nombre = resultSet.getString("nombre");
